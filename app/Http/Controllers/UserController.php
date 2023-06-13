@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    //
+    // REGISTER USER =====================================================
     public function register(Request $req)
     
     {
@@ -22,6 +22,14 @@ class UserController extends Controller
         $user = User::create($incomingFields);
 
         auth()->login($user);
+
+        return redirect('/');
+    }
+
+    // LOGOUT USER ========================================================
+    public function logout()
+    {
+        auth()->logout();
 
         return redirect('/');
     }
