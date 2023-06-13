@@ -15,6 +15,13 @@
     <button type="submit">Logout</button>
   </form>
 
+  {{-- create a post  --}}
+  <form action="/create-post" method="POST">
+    @csrf
+    <input type="text" name="title" placeholder="Title" >
+    <input type="text" name="body" placeholder="Body" >
+    <button type="submit">Create</button>
+  </form>
   
   @else 
 
