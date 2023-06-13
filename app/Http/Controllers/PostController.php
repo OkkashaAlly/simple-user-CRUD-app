@@ -25,4 +25,35 @@ class PostController extends Controller
         return redirect('/');
     }
 
+    // SHOW EDIT POST FORM ==================================================
+    public function showEditPostForm(Post $post)
+    {
+        if (auth()->user()->id !== $post->user_id) {
+            return redirect('/');
+        }
+
+        return view('edit-post', ['post' => $post]);
+    }
+
+    // EDIT POST ===========================================================
+    public function editPost(Request $req, Post $post)
+    {
+        if (auth()->user()->id !== $post->user_id) {
+            return redirect('/');
+        }
+        
+        $incomingFields = $req->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        // strip tags and encode special characters
+        $incomingFields['title'] = htmlspecialchars(strip_tags($incomingFields['title']));
+        $incomingFields['body'] = htmlspecialchars(strip_tags($incomingFields['body']));
+
+        $post->update($incomingFields);
+
+        return redirect('/');
+    }
+
 }
