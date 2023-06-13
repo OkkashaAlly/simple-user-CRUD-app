@@ -41,7 +41,7 @@ class PostController extends Controller
         if (auth()->user()->id !== $post->user_id) {
             return redirect('/');
         }
-        
+
         $incomingFields = $req->validate([
             'title' => 'required',
             'body' => 'required'
@@ -53,6 +53,16 @@ class PostController extends Controller
 
         $post->update($incomingFields);
 
+        return redirect('/');
+    }
+
+    // DELETE POST =========================================================
+    public function deletePost(Post $post)
+    {
+        if (auth()->user()->id === $post->user_id) {
+            $post->delete();
+        }
+        
         return redirect('/');
     }
 
