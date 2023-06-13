@@ -16,17 +16,31 @@
   </form>
 
   {{-- create a post  --}}
+  <div style="border: 2px solid black">
   <form action="/create-post" method="POST">
     @csrf
     <input type="text" name="title" placeholder="Title" >
     <input type="text" name="body" placeholder="Body" >
     <button type="submit">Create</button>
   </form>
+  </div>
+
+  {{-- show all posts  --}}
+  <div style="border: 2px solid black">
+    <h1 >All Posts</h1>
+    @foreach ($posts as $post)
+      <div style="background-color: gray; padding: 10px; margin: 10px;" >
+        <h1 >{{ $post->title }}</h1>
+        <p>{{ $post->body }}</p>
+        <p>{{ $post->created_at->diffForHumans() }}</p>
+      </div>
+    @endforeach
+  </div>
   
   @else 
 
   
-  <div style="border: 2px solid black" class="p-4 border border-gray-100 rounded bg-gray-100">
+  <div style="border: 2px solid black">
     <h1 class="text-2xl font-bold">Register here</h1>
     <form action="/register" method="POST">
       @csrf
