@@ -6,6 +6,13 @@
   <title>Home</title>
 </head>
 <body>
+  @auth
+
+  <h1>Welcome {{ auth()->user()->name }}</h1>
+  
+  @else 
+
+  
   <div style="border: 2px solid black" class="p-4 border border-gray-100 rounded bg-gray-100">
     <h1 class="text-2xl font-bold">Register here</h1>
     <form action="/register" method="POST">
@@ -16,5 +23,7 @@
       <button type="submit" class="bg-blue-500 text-white p-2 rounded mt-2 w-full">Register</button>
     </form>
   </div>
+
+  @endauth
 </body>
 </html>
